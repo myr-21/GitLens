@@ -115,13 +115,13 @@ export function RepoCard({ suggestion, repo }: RepoCardProps) {
       </div>
 
       {/* Actions */}
-      <div className="flex items-center gap-2 mt-auto">
+      <div className="flex flex-wrap items-center gap-2 mt-auto w-full">
         {ghUrl ? (
           <a
             href={ghUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex-1 bg-foreground text-background text-sm font-medium py-2 rounded-md hover:bg-foreground/90 transition-colors text-center inline-flex items-center justify-center gap-1.5"
+            className="flex-1 min-w-[120px] bg-foreground text-background text-sm font-medium py-2 px-3 rounded-md hover:bg-foreground/90 transition-colors text-center inline-flex items-center justify-center gap-1.5 min-h-[44px]"
           >
             View on GitHub <ExternalLink className="size-3.5" />
           </a>
@@ -129,16 +129,16 @@ export function RepoCard({ suggestion, repo }: RepoCardProps) {
           <Link
             to="/repo/$slug"
             params={{ slug }}
-            className="flex-1 bg-foreground text-background text-sm font-medium py-2 rounded-md hover:bg-foreground/90 transition-colors text-center inline-flex items-center justify-center gap-1.5"
+            className="flex-1 min-w-[120px] bg-foreground text-background text-sm font-medium py-2 px-3 rounded-md hover:bg-foreground/90 transition-colors text-center inline-flex items-center justify-center gap-1.5 min-h-[44px]"
           >
             View Repo <ExternalLink className="size-3.5" />
           </Link>
         )}
-        <button className="py-2 px-3 bg-secondary text-zinc-300 text-sm rounded-md border border-border hover:bg-secondary/70 transition-colors inline-flex items-center gap-1.5">
+        <button className="flex-1 sm:flex-none min-w-[90px] py-2 px-3 bg-secondary text-zinc-300 text-sm rounded-md border border-border hover:bg-secondary/70 transition-colors inline-flex items-center justify-center gap-1.5 min-h-[44px]">
           <GitCompare className="size-3.5" /> Compare
         </button>
         <button
-          className="p-2 bg-secondary text-zinc-300 rounded-md border border-border hover:bg-secondary/70 transition-colors"
+          className="p-2 bg-secondary text-zinc-300 rounded-md border border-border hover:bg-secondary/70 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
           aria-label="Save"
         >
           <Bookmark className="size-4" />

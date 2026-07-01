@@ -19,7 +19,7 @@ const sections = [
 function Discover() {
   return (
     <AppShell>
-      <div className="max-w-6xl mx-auto w-full px-8 py-12 space-y-14">
+      <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-12 space-y-14">
         <header className="animate-fade-up">
           <h1 className="text-3xl font-semibold tracking-tight">Discover</h1>
           <p className="text-muted-foreground mt-2 max-w-xl">

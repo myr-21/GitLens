@@ -37,7 +37,6 @@ function Results() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Abort controller so in-flight requests are cancelled when a new one starts
   const abortRef = useRef<AbortController | null>(null);
 
   const runSearch = async (description: string, lang: string) => {
@@ -65,7 +64,6 @@ function Results() {
     }
   };
 
-  // Run on mount and whenever the URL search params change
   useEffect(() => {
     if (q) runSearch(q, lang);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -78,9 +76,9 @@ function Results() {
 
   return (
     <AppShell>
-      {/* Sticky search bar */}
-      <div className="sticky top-0 z-20 bg-canvas/85 backdrop-blur-md border-b border-border">
-        <div className="max-w-6xl mx-auto px-8 py-4 flex items-center gap-3">
+      {/* Responsive Sticky search bar */}
+      <div className="sticky top-14 sm:top-0 z-20 bg-canvas/85 backdrop-blur-md border-b border-border">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col md:flex-row items-stretch md:items-center gap-3">
           <form onSubmit={handleSubmit} className="relative flex-1">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 size-4 text-muted-foreground/60" />
             <input
@@ -89,43 +87,45 @@ function Results() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search projects, tech stacks, or ideas…"
-              className="w-full bg-surface border border-border rounded-lg py-2.5 pl-11 pr-4 text-sm outline-none focus:border-accent/40 focus:ring-1 focus:ring-accent/40 transition-all"
+              className="w-full bg-surface border border-border rounded-lg py-2.5 pl-11 pr-4 text-sm outline-none focus:border-accent/40 focus:ring-1 focus:ring-accent/40 transition-all min-h-[44px]"
             />
           </form>
 
-          {/* Language filter */}
-          <select
-            id="language-filter"
-            value={language}
-            onChange={(e) => {
-              setLanguage(e.target.value);
-              navigate({
-                to: "/results",
-                search: { q: query, lang: e.target.value, limit },
-              });
-            }}
-            className="bg-surface border border-border rounded-lg px-3 py-2.5 text-sm text-zinc-200 outline-none focus:border-accent/40 cursor-pointer"
-          >
-            {LANGUAGES.map((l) => (
-              <option key={l} value={l === "Any" ? "" : l}>
-                {l}
-              </option>
-            ))}
-          </select>
+          <div className="flex items-center gap-2 w-full md:w-auto">
+            {/* Language filter */}
+            <select
+              id="language-filter"
+              value={language}
+              onChange={(e) => {
+                setLanguage(e.target.value);
+                navigate({
+                  to: "/results",
+                  search: { q: query, lang: e.target.value, limit },
+                });
+              }}
+              className="flex-1 md:flex-none bg-surface border border-border rounded-lg px-3 py-2.5 text-sm text-zinc-200 outline-none focus:border-accent/40 cursor-pointer min-h-[44px]"
+            >
+              {LANGUAGES.map((l) => (
+                <option key={l} value={l === "Any" ? "" : l}>
+                  {l}
+                </option>
+              ))}
+            </select>
 
-          <button
-            type="button"
-            onClick={handleSubmit}
-            className="inline-flex items-center gap-2 px-3 py-2.5 rounded-lg bg-surface border border-border text-sm text-muted-foreground hover:text-foreground transition-colors"
-          >
-            <SlidersHorizontal className="size-4" /> Search
-          </button>
+            <button
+              type="button"
+              onClick={handleSubmit}
+              className="flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg bg-surface border border-border text-sm text-muted-foreground hover:text-foreground transition-colors min-h-[44px]"
+            >
+              <SlidersHorizontal className="size-4" /> Search
+            </button>
+          </div>
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto w-full px-8 py-8">
+      <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 flex-1 flex flex-col">
         {/* Header */}
-        <div className="mb-6 flex items-baseline justify-between">
+        <div className="mb-6 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
           <div>
             <h1 className="text-xl font-semibold">
               {q ? (
@@ -164,7 +164,7 @@ function Results() {
 
         {/* Loading state */}
         {loading && (
-          <div className="flex flex-col items-center justify-center py-32 gap-4 text-muted-foreground">
+          <div className="flex flex-col items-center justify-center py-32 gap-4 text-muted-foreground my-auto">
             <Loader2 className="size-8 animate-spin text-accent" />
             <p className="text-sm">Analysing your description with BERT embeddings…</p>
           </div>
@@ -172,7 +172,7 @@ function Results() {
 
         {/* Error state */}
         {!loading && error && (
-          <div className="flex items-start gap-3 bg-red-500/10 border border-red-500/20 rounded-xl px-5 py-4 text-red-400">
+          <div className="flex items-start gap-3 bg-red-500/10 border border-red-500/20 rounded-xl px-5 py-4 text-red-400 my-auto">
             <AlertCircle className="size-5 mt-0.5 shrink-0" />
             <div>
               <p className="text-sm font-medium">Backend error</p>
@@ -187,7 +187,7 @@ function Results() {
 
         {/* Results grid */}
         {!loading && data && data.suggestions.length > 0 && (
-          <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {data.suggestions.map((s) => (
               <RepoCard key={s.repo} suggestion={s} />
             ))}
@@ -196,7 +196,7 @@ function Results() {
 
         {/* Empty state */}
         {!loading && !error && data && data.suggestions.length === 0 && (
-          <div className="text-center py-24 text-muted-foreground">
+          <div className="text-center py-24 text-muted-foreground my-auto">
             <p className="text-lg font-medium">No repositories found</p>
             <p className="text-sm mt-1">Try rephrasing your description or removing filters.</p>
           </div>

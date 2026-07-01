@@ -17,7 +17,7 @@ const collections = [
 function Collections() {
   return (
     <AppShell>
-      <div className="max-w-6xl mx-auto w-full px-8 py-12">
+      <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-12">
         <header className="flex items-end justify-between mb-10 animate-fade-up">
           <div>
             <h1 className="text-3xl font-semibold tracking-tight">Collections</h1>

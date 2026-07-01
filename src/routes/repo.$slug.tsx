@@ -43,7 +43,7 @@ function RepoDetail() {
 
   return (
     <AppShell>
-      <div className="max-w-6xl mx-auto w-full px-8 py-12 space-y-10">
+      <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-12 space-y-10">
         <header className="flex flex-col md:flex-row md:items-start md:justify-between gap-6 animate-fade-up">
           <div className="min-w-0">
             <div className="text-xs font-mono text-muted-foreground uppercase tracking-widest mb-2">
@@ -63,13 +63,13 @@ function RepoDetail() {
             </div>
           </div>
           <div className="flex flex-wrap gap-2 shrink-0">
-            <a className="bg-foreground text-background text-sm font-medium py-2 px-4 rounded-md hover:bg-foreground/90 transition-colors inline-flex items-center gap-1.5">
+            <a className="bg-foreground text-background text-sm font-medium py-2 px-4 rounded-md hover:bg-foreground/90 transition-colors inline-flex items-center gap-1.5 min-h-[44px]">
               Open on GitHub <ExternalLink className="size-3.5" />
             </a>
-            <button className="bg-secondary border border-border text-sm py-2 px-3 rounded-md hover:bg-secondary/70 inline-flex items-center gap-1.5">
+            <button className="bg-secondary border border-border text-sm py-2 px-3 rounded-md hover:bg-secondary/70 inline-flex items-center gap-1.5 min-h-[44px]">
               <GitCompare className="size-3.5" /> Compare
             </button>
-            <button className="bg-secondary border border-border text-sm py-2 px-3 rounded-md hover:bg-secondary/70 inline-flex items-center gap-1.5">
+            <button className="bg-secondary border border-border text-sm py-2 px-3 rounded-md hover:bg-secondary/70 inline-flex items-center gap-1.5 min-h-[44px]">
               <Bookmark className="size-3.5" /> Save
             </button>
           </div>
